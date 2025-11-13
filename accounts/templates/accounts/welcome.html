@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome</title>
+    <style>
+      /* Basic reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        animation: fadeInDown 1.2s ease forwards;
+      }
+
+      p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        animation: fadeInUp 1.5s ease forwards;
+      }
+
+      a {
+        display: inline-block;
+        margin: 0 15px;
+        padding: 12px 25px;
+        border: 2px solid white;
+        border-radius: 25px;
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        animation: fadeInUp 1.5s ease forwards;
+      }
+
+      a:hover {
+        background-color: white;
+        color: #2575fc;
+        transform: scale(1.1);
+      }
+
+      /* Animations */
+      @keyframes fadeInDown {
+        0% {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Floating circles */
+      .circle {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.2;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .circle1 {
+        width: 100px;
+        height: 100px;
+        background: #fff;
+        top: 10%;
+        left: 15%;
+        animation-delay: 0s;
+      }
+
+      .circle2 {
+        width: 150px;
+        height: 150px;
+        background: #fff;
+        top: 70%;
+        left: 60%;
+        animation-delay: 2s;
+      }
+
+      .circle3 {
+        width: 80px;
+        height: 80px;
+        background: #fff;
+        top: 50%;
+        left: 80%;
+        animation-delay: 4s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Floating background circles -->
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+    <div class="circle circle3"></div>
+
+    <!-- Main welcome content -->
+    <h2>Welcome, {{ user.username }}!</h2>
+    <p>You have logged in successfully.</p>
+
+    <!-- Optional buttons -->
+    <p>
+      <a href="{% url 'home' %}">Home</a>
+    </p>
+  </body>
+</html>
