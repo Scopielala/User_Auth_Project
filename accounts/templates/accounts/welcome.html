@@ -1,141 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Welcome</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard</title>
     <style>
-      /* Basic reset */
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Arial", sans-serif;
+        font-family: "Segoe UI", Arial, sans-serif;
       }
 
       body {
         height: 100vh;
         display: flex;
-        justify-content: center;
-        align-items: center;
         flex-direction: column;
         background: linear-gradient(135deg, #6a11cb, #2575fc);
-        color: white;
-        text-align: center;
-        overflow: hidden;
+        color: #fff;
       }
 
-      h2 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-        animation: fadeInDown 1.2s ease forwards;
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 40px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
       }
 
-      p {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-        animation: fadeInUp 1.5s ease forwards;
+      header h2 {
+        font-size: 1.8rem;
+        font-weight: 600;
       }
 
-      a {
-        display: inline-block;
-        margin: 0 15px;
-        padding: 12px 25px;
+      header a {
+        padding: 10px 20px;
         border: 2px solid white;
         border-radius: 25px;
         text-decoration: none;
         color: white;
-        font-weight: bold;
         transition: all 0.3s ease;
-        animation: fadeInUp 1.5s ease forwards;
+        font-weight: bold;
       }
 
-      a:hover {
+      header a:hover {
         background-color: white;
         color: #2575fc;
-        transform: scale(1.1);
+        transform: scale(1.05);
       }
 
-      /* Animations */
-      @keyframes fadeInDown {
-        0% {
-          opacity: 0;
-          transform: translateY(-50px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
       }
 
-      @keyframes fadeInUp {
-        0% {
-          opacity: 0;
-          transform: translateY(50px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      .dashboard {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        width: 80%;
+        max-width: 1000px;
+        margin-top: 40px;
       }
 
-      /* Floating circles */
-      .circle {
-        position: absolute;
-        border-radius: 50%;
-        opacity: 0.2;
-        animation: float 6s ease-in-out infinite;
+      .card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+        padding: 30px;
+        border-radius: 15px;
+        text-align: left;
+        transition: all 0.3s ease;
       }
 
-      .circle1 {
-        width: 100px;
-        height: 100px;
-        background: #fff;
-        top: 10%;
-        left: 15%;
-        animation-delay: 0s;
+      .card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.2);
       }
 
-      .circle2 {
-        width: 150px;
-        height: 150px;
-        background: #fff;
-        top: 70%;
-        left: 60%;
-        animation-delay: 2s;
+      .card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
       }
 
-      .circle3 {
-        width: 80px;
-        height: 80px;
-        background: #fff;
-        top: 50%;
-        left: 80%;
-        animation-delay: 4s;
+      .card p {
+        font-size: 1rem;
+        color: #f0f0f0;
       }
 
-      @keyframes float {
-        0%,
-        100% {
-          transform: translateY(0px);
-        }
-        50% {
-          transform: translateY(-20px);
-        }
+      footer {
+        text-align: center;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        font-size: 0.9rem;
       }
     </style>
   </head>
   <body>
-    <!-- Floating background circles -->
-    <div class="circle circle1"></div>
-    <div class="circle circle2"></div>
-    <div class="circle circle3"></div>
+    <header>
+      <h2>Welcome, {{ user.username }} 👋</h2>
+      <div>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'logout' %}">Logout</a>
+      </div>
+    </header>
 
-    <!-- Main welcome content -->
-    <h2>Welcome, {{ user.username }}!</h2>
-    <p>You have logged in successfully.</p>
+    <main>
+      <h1>Your Dashboard</h1>
+      <p>Here’s a quick overview of your account and activities.</p>
 
-    <!-- Optional buttons -->
-    <p>
-      <a href="{% url 'home' %}">Home</a>
-    </p>
+      <div class="dashboard">
+        <div class="card">
+          <h3>📩 Messages</h3>
+          <p>You have 3 new messages waiting.</p>
+        </div>
+        <div class="card">
+          <h3>👤 Profile</h3>
+          <p>Manage your personal info and account settings.</p>
+        </div>
+        <div class="card">
+          <h3>🕒 Recent Activity</h3>
+          <p>Last login: {{ user.last_login }}</p>
+        </div>
+        <div class="card">
+          <h3>⚙️ Settings</h3>
+          <p>Update preferences and privacy controls.</p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      &copy; {{ user.username }}'s Dashboard | Built with Django 💙
+    </footer>
   </body>
 </html>

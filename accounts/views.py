@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+
 
 
 
@@ -32,6 +33,10 @@ def user_login(request):
             return render(request, 'accounts/login.html', {'error': 'invalid username or password'})
         
     return render(request, 'accounts/login.html')
+
+def user_logout(request):
+    logout(request)
+    return redirect('login')
         
 
                 

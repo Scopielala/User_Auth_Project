@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
     <style>
       /* Basic reset */
@@ -23,7 +25,6 @@
         overflow: hidden;
       }
 
-      h1,
       h2 {
         font-size: 3rem;
         margin-bottom: 2rem;
@@ -58,6 +59,23 @@
       input:focus {
         border-color: #2575fc;
         background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Eye icon container */
+      .password-container {
+        position: relative;
+        width: 250px;
+      }
+
+      .toggle-password {
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #fff;
+        font-size: 1rem;
+        user-select: none;
       }
 
       button {
@@ -161,7 +179,6 @@
         margin-bottom: 10px;
       }
 
-      /* Extra links below form */
       .extra-links {
         margin-top: 15px;
         display: flex;
@@ -191,10 +208,20 @@
       <input type="email" name="email" required />
 
       <label>Password:</label>
-      <input type="password" name="password1" required />
+      <div class="password-container">
+        <input type="password" name="password1" id="password1" required />
+        <span class="toggle-password" onclick="togglePassword('password1')"
+          >👁️</span
+        >
+      </div>
 
       <label>Confirm Password:</label>
-      <input type="password" name="password2" required />
+      <div class="password-container">
+        <input type="password" name="password2" id="password2" required />
+        <span class="toggle-password" onclick="togglePassword('password2')"
+          >👁️</span
+        >
+      </div>
 
       <button type="submit">Register</button>
     </form>
@@ -203,5 +230,12 @@
       <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
       <p><a href="{% url 'home' %}">Back to Home</a></p>
     </div>
+
+    <script>
+      function togglePassword(id) {
+        const input = document.getElementById(id);
+        input.type = input.type === "password" ? "text" : "password";
+      }
+    </script>
   </body>
 </html>
