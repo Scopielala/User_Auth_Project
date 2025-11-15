@@ -62,7 +62,6 @@
         background-color: rgba(255, 255, 255, 0.1);
       }
 
-      /* Eye icon container */
       .password-container {
         position: relative;
         width: 250px;
@@ -108,7 +107,19 @@
         text-decoration: underline;
       }
 
-      /* Fade in animations */
+      .error {
+        color: #ff6b6b;
+        margin-bottom: 10px;
+      }
+
+      .extra-links {
+        margin-top: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      /* Animations */
       @keyframes fadeInDown {
         0% {
           opacity: 0;
@@ -131,7 +142,6 @@
         }
       }
 
-      /* Floating background circles */
       .circle {
         position: absolute;
         border-radius: 50%;
@@ -173,19 +183,6 @@
           transform: translateY(-20px);
         }
       }
-
-      /* Error message styling */
-      .error {
-        color: #ff6b6b;
-        margin-bottom: 10px;
-      }
-
-      .extra-links {
-        margin-top: 15px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
     </style>
   </head>
   <body>
@@ -196,12 +193,16 @@
 
     <h2>Login</h2>
 
+    <!-- Error message -->
     {% if error %}
     <p class="error">{{ error }}</p>
     {% endif %}
 
     <form method="POST">
       {% csrf_token %}
+      <!-- Preserve next parameter for redirects -->
+      <input type="hidden" name="next" value="{{ next }}" />
+
       <label>Username:</label>
       <input type="text" name="username" required />
 
@@ -222,8 +223,8 @@
     <script>
       function togglePassword() {
         const passwordInput = document.getElementById("password");
-        const type = passwordInput.type === "password" ? "text" : "password";
-        passwordInput.type = type;
+        passwordInput.type =
+          passwordInput.type === "password" ? "text" : "password";
       }
     </script>
   </body>
